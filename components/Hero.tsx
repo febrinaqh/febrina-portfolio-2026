@@ -1,9 +1,42 @@
-import React from 'react'
+import { cn } from "@/lib/utils";
 
 const Hero = () => {
   return (
-    <div>Hero</div>
-  )
-}
+    <section
+      className={cn(
+        "relative flex min-h-screen w-auto items-center justify-center",
+        "-mx-5 sm:-mx-10",
+        "px-5 sm:px-10",
+        "overflow-hidden",
+      )}
+    >
 
-export default Hero
+      {/* Grid */}
+      <div
+        className={cn(
+          "absolute inset-0",
+          "[background-size:40px_40px]",
+          "[background-image:linear-gradient(to_right,rgba(124,92,252,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(124,92,252,0.07)_1px,transparent_1px)]",
+        )}
+      />
+
+      {/* Radial fade */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background: "var(--bg)",
+          maskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
+        }}
+      />
+
+      {/* Konten */}
+      <div className="relative z-20">
+        <p className="text-white">Hello Febrina</p>
+      </div>
+
+    </section>
+  );
+};
+
+export default Hero;
