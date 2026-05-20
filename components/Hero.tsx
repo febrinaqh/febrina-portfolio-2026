@@ -1,4 +1,5 @@
 import { cn } from "@/lib/utils";
+import { Spotlight } from "./ui/spotlight";
 
 const Hero = () => {
   return (
@@ -10,7 +11,6 @@ const Hero = () => {
         "overflow-hidden",
       )}
     >
-
       {/* Grid */}
       <div
         className={cn(
@@ -25,16 +25,17 @@ const Hero = () => {
         className="pointer-events-none absolute inset-0"
         style={{
           background: "var(--bg)",
-          maskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, transparent 20%, black)",
+          maskImage:
+            "radial-gradient(ellipse at center, transparent 20%, black)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse at center, transparent 20%, black)",
         }}
       />
 
-      {/* Konten */}
-      <div className="relative z-20">
-        <p className="text-white">Hello Febrina</p>
-      </div>
+      {/* Glow Orb Spotlight */}
+      <Spotlight className="-top-60 left-[25%]" fill="#7C5CFC" />
 
+      <Spotlight className="-top-15 left-[95%]" fill="#2DD4BF" />
     </section>
   );
 };
