@@ -223,7 +223,7 @@ export const personal = {
   greeting: "Hi, I'm",
   name: "Febrina Qoonitah",
   initials: "FQ",
-  role: "Applied AI Engineer",
+  role: "Software Engineer",
   focus: "Software Engineer · AI/ML · Full-Stack · Scalable Systems",
   bio: "Software Engineer experienced in developing scalable, data-driven systems through the integration of AI, Machine Learning, and real-time web technologies.",
   status: "Open to opportunities",
