@@ -4,13 +4,17 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { projects, type Domain } from '@/data'
 
-const TABS: { label: string; value: Domain | 'all' }[] = [
-  { label: 'all',        value: 'all' },
-  { label: 'fullstack',  value: 'fullstack' },
-  { label: 'ai / ml',   value: 'ai-ml' },
-  { label: 'ui / ux',   value: 'ui-ux' },
-  { label: 'enterprise', value: 'enterprise' },
+const TABS: { label: string; value: Domain }[] = [
+  { label: 'software', value: 'software' },
+  { label: 'ai / ml',  value: 'ai-ml' },
+  { label: 'others',   value: 'others' },
 ]
+
+const TOP_BORDER: Record<string, string> = {
+  software: 'linear-gradient(90deg,#7c5cfc,#2dd4bf)',
+  'ai-ml':  'linear-gradient(90deg,#2dd4bf,#7c5cfc)',
+  others:   'linear-gradient(90deg,#f472b6,#a78bfa)',
+}
 
 const BADGE_STYLES: Record<string, { bg: string; color: string; border: string }> = {
   star: { bg: 'rgba(245,158,11,0.1)',   color: '#fcd34d', border: 'rgba(245,158,11,0.25)' },
@@ -20,16 +24,9 @@ const BADGE_STYLES: Record<string, { bg: string; color: string; border: string }
   java: { bg: 'rgba(251,146,60,0.1)',   color: '#fb923c', border: 'rgba(251,146,60,0.25)' },
 }
 
-const TOP_BORDER: Record<string, string> = {
-  fullstack:  'linear-gradient(90deg,#7c5cfc,#2dd4bf)',
-  'ai-ml':    'linear-gradient(90deg,#2dd4bf,#7c5cfc)',
-  'ui-ux':    'linear-gradient(90deg,#f472b6,#a78bfa)',
-  enterprise: 'linear-gradient(90deg,#fb923c,#f59e0b)',
-}
-
 function getDominantDomain(domains: Domain[]): string {
   if (domains.includes('ai-ml')) return 'ai-ml'
-  if (domains.includes('fullstack')) return 'fullstack'
+  if (domains.includes('software')) return 'software'
   return domains[0]
 }
 
@@ -295,13 +292,11 @@ function ProjectCard({ project, index }: { project: typeof projects[0]; index: n
 
 // ── Main Projects section ─────────────────────────────────────────────────────
 export default function Projects() {
-  const [active, setActive] = useState<Domain | 'all'>('all')
+  const [active, setActive] = useState<Domain>('software')
 
-  const filtered = active === 'all'
-    ? projects
-    : projects.filter((p) => p.domains.includes(active as Domain))
+  const filtered = projects.filter((p) => p.domains.includes(active))
 
-  const featured   = filtered.find((p) => p.featured)
+  const featured    = filtered.find((p) => p.featured)
   const nonFeatured = filtered.filter((p) => !p.featured)
 
   return (

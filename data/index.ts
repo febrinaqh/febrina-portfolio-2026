@@ -1,6 +1,6 @@
 // ─── PROJECTS ────────────────────────────────────────────────────────────────
 
-export type Domain = "fullstack" | "ai-ml" | "ui-ux" | "enterprise";
+export type Domain = "software" | "ai-ml" | "others";
 
 export interface Project {
   id: string;
@@ -28,7 +28,7 @@ export const projects: Project[] = [
       "Real-time earthquake monitoring system with ML-powered device classification",
     description:
       "Sistem monitoring real-time untuk perangkat peringatan dini gempa. Model SVM memproses 297K+ error records, mengklasifikasi status otomatis, dan memberikan rekomendasi via OpenAI API — dilengkapi peta geospasial interaktif.",
-    domains: ["fullstack", "ai-ml"],
+    domains: ["software", "ai-ml"],
     featured: true,
     badge: { label: "Hero Project", emoji: "✦", color: "star" },
     metrics: [
@@ -61,7 +61,7 @@ export const projects: Project[] = [
       "Award-winning hoax verification platform with Telegram Bot integration",
     description:
       "Platform web verifikasi berita hoaks bertema Industry 5.0 dengan fitur live news, pelaporan artikel, dan distribusi informasi terverifikasi real-time via Telegram Bot.",
-    domains: ["fullstack"],
+    domains: ["software"],
     badge: { label: "Menang Lomba ProxoCoris", emoji: "🏆", color: "win" },
     stack: [
       "React.js",
@@ -104,7 +104,7 @@ export const projects: Project[] = [
     tagline: "Full-featured e-learning platform presented at UTB Tech Expo",
     description:
       "Platform kelas online end-to-end dengan authentication, katalog kursus, wishlist, dan sistem pembayaran — dipresentasikan di Tech Expo Universitas Teknologi Bandung.",
-    domains: ["fullstack"],
+    domains: ["software"],
     badge: { label: "Tech Expo UTB", emoji: "🎓", color: "expo" },
     stack: ["React.js", "PHP", "Open API", "MySQL", "REST API"],
     stackHighlight: ["React.js", "PHP"],
@@ -117,7 +117,7 @@ export const projects: Project[] = [
       "Enterprise Java system with 4-role access and real-time inventory across 7 locations",
     description:
       "Sistem manajemen bisnis terintegrasi berbasis Java dengan 4 level akses (Admin, Admin Gudang, Sales, Direktur), inventory real-time di 7 lokasi, dan laporan JasperReports untuk level direktur.",
-    domains: ["enterprise"],
+    domains: ["software"],
     badge: { label: "Java · Enterprise", emoji: "☕", color: "java" },
     stack: ["Java", "MySQL", "OOP", "JasperReports"],
     stackHighlight: ["Java", "JasperReports"],
