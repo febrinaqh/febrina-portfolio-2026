@@ -1,8 +1,17 @@
+"use client";
+
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "./ui/spotlight";
 import { personal } from "@/data";
 import { TypewriterEffect } from "./ui/typewriter-effect";
 import Image from "next/image";
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.6, delay, ease: "easeOut" as const },
+});
 
 const Hero = () => {
   return (
@@ -14,7 +23,7 @@ const Hero = () => {
       {/* Grid */}
       <div
         className={cn(
-          "fixed inset-0",
+          "absolute inset-0",
           "[background-size:24px_24px] sm:[background-size:40px_40px]",
           "[background-image:linear-gradient(to_right,rgba(124,92,252,0.07)_1px,transparent_1px),linear-gradient(to_bottom,rgba(124,92,252,0.07)_1px,transparent_1px)]",
         )}
@@ -22,7 +31,7 @@ const Hero = () => {
 
       {/* Radial fade */}
       <div
-        className="pointer-events-none fixed inset-0"
+        className="pointer-events-none absolute inset-0"
         style={{
           background: "var(--bg)",
           maskImage:
@@ -43,7 +52,8 @@ const Hero = () => {
         {/* LEFT — Bio */}
 
         {/* Name */}
-        <div className="w-full text-center sm:text-left order-2 sm:order-1">
+        <motion.div {...fadeUp(0)}
+        className="w-full text-center sm:text-left order-2 sm:order-1">
           <h1
             style={{
               fontFamily: "IBM Plex Mono, monospace",
@@ -70,12 +80,15 @@ const Hero = () => {
               }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* RIGHT — Photo Card */}
-        <div className="relative overflow-hidden w-[180px] xs:w-[200px] sm:w-[220px] mx-auto sm:mx-0 flex-shrink-0 order-1 sm:order-2 flex flex-col gap-2.5">
+        <motion.div {...fadeUp(0.15)}
+          className="relative overflow-hidden w-[180px] xs:w-[200px] sm:w-[220px] mx-auto sm:mx-0 flex-shrink-0 order-1 sm:order-2 flex flex-col gap-2.5"
+        >
           {/* Foto */}
           <div
+            className="relative overflow-hidden"
             style={{
               background: "var(--surface)",
               border: "0.5px solid var(--border2)",
@@ -86,15 +99,10 @@ const Hero = () => {
             <Image
               src={personal.avatar}
               alt={personal.name}
-              width={220}
-              height={280}
+              fill
               priority
-              style={{
-                objectFit: "cover",
-                width: "100%",
-                height: "100%",
-                borderRadius: "16px",
-              }}
+              sizes="220px"
+              style={{ objectFit: "cover" }}
             />
           </div>
 
@@ -157,7 +165,7 @@ const Hero = () => {
               {personal.focus}
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
