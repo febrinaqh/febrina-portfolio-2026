@@ -9,14 +9,9 @@ export interface Project {
   description: string;
   domains: Domain[];
   featured?: boolean;
-  badge?: {
-    label: string;
-    emoji: string;
-    color: "star" | "win" | "ml" | "expo" | "java";
-  };
-  metrics?: { value: string; label: string }[];
   stack: string[];
   stackHighlight?: string[];
+  thumbnail?: string;
   links: { demo?: string; github?: string; case?: string };
 }
 
@@ -30,12 +25,6 @@ export const projects: Project[] = [
       "Sistem monitoring real-time untuk perangkat peringatan dini gempa. Model SVM memproses 297K+ error records, mengklasifikasi status otomatis, dan memberikan rekomendasi via OpenAI API — dilengkapi peta geospasial interaktif.",
     domains: ["software", "ai-ml"],
     featured: true,
-    badge: { label: "Hero Project", emoji: "✦", color: "star" },
-    metrics: [
-      { value: "96.13%", label: "SVM accuracy" },
-      { value: "297K+", label: "records processed" },
-      { value: "3", label: "user roles" },
-    ],
     stack: [
       "React.js",
       "Node.js",
@@ -52,7 +41,8 @@ export const projects: Project[] = [
       "Socket.IO",
     ],
     stackHighlight: ["React.js", "Python", "SVM", "OpenAI API"],
-    links: {},
+    links: { github: "https://github.com/ibayeye/diwd" },
+    thumbnail: "/images/diwd dashboard.jpg",
   },
   {
     id: "temukan-hoax",
@@ -62,7 +52,6 @@ export const projects: Project[] = [
     description:
       "Platform web verifikasi berita hoaks bertema Industry 5.0 dengan fitur live news, pelaporan artikel, dan distribusi informasi terverifikasi real-time via Telegram Bot.",
     domains: ["software"],
-    badge: { label: "Menang Lomba ProxoCoris", emoji: "🏆", color: "win" },
     stack: [
       "React.js",
       "Tailwind CSS",
@@ -84,8 +73,6 @@ export const projects: Project[] = [
     description:
       "Model XGBoost (82% akurasi) untuk prediksi produk + Apriori algorithm untuk product association analysis, diintegrasikan ke web app via Flask API dengan dashboard visualisasi React.js.",
     domains: ["ai-ml"],
-    badge: { label: "AI / ML", emoji: "🤖", color: "ml" },
-    metrics: [{ value: "82%", label: "XGBoost accuracy" }],
     stack: [
       "Python",
       "XGBoost",
@@ -105,7 +92,6 @@ export const projects: Project[] = [
     description:
       "Platform kelas online end-to-end dengan authentication, katalog kursus, wishlist, dan sistem pembayaran — dipresentasikan di Tech Expo Universitas Teknologi Bandung.",
     domains: ["software"],
-    badge: { label: "Tech Expo UTB", emoji: "🎓", color: "expo" },
     stack: ["React.js", "PHP", "Open API", "MySQL", "REST API"],
     stackHighlight: ["React.js", "PHP"],
     links: {},
@@ -118,7 +104,6 @@ export const projects: Project[] = [
     description:
       "Sistem manajemen bisnis terintegrasi berbasis Java dengan 4 level akses (Admin, Admin Gudang, Sales, Direktur), inventory real-time di 7 lokasi, dan laporan JasperReports untuk level direktur.",
     domains: ["software"],
-    badge: { label: "Java · Enterprise", emoji: "☕", color: "java" },
     stack: ["Java", "MySQL", "OOP", "JasperReports"],
     stackHighlight: ["Java", "JasperReports"],
     links: {},
