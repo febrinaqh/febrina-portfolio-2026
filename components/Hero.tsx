@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import { Spotlight } from "./ui/spotlight";
 import { personal } from "@/data";
 import { TypewriterEffect } from "./ui/typewriter-effect";
-import Image from "next/image";
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 24 },
@@ -47,13 +46,10 @@ const Hero = () => {
         <Spotlight className="top-40 left-full" fill="#2DD4BF" />
       </div>
 
-      {/* Content wrapper — 2 kolom */}
-      <div className="relative z-10 flex w-full max-w-5xl flex-col sm:flex-row items-center gap-8 sm:gap-12 lg:gap-20">
-        {/* LEFT — Bio */}
-
+      {/* Content wrapper */}
+      <div className="relative z-10 flex w-full max-w-5xl flex-col items-center">
         {/* Name */}
-        <motion.div {...fadeUp(0)}
-        className="w-full text-center sm:text-left order-2 sm:order-1">
+        <motion.div {...fadeUp(0)} className="w-full text-center">
           <h1
             style={{
               fontFamily: "IBM Plex Mono, monospace",
@@ -69,7 +65,7 @@ const Hero = () => {
             <span style={{ color: "var(--purple2)" }}>{personal.name}</span>
           </h1>
 
-          <div className="sm:justify-start">
+          <div>
             <TypewriterEffect
               words={personal.role.split(" ").map((word) => ({ text: word }))}
               style={{
@@ -79,91 +75,6 @@ const Hero = () => {
                 marginBottom: "20px",
               }}
             />
-          </div>
-        </motion.div>
-
-        {/* RIGHT — Photo Card */}
-        <motion.div {...fadeUp(0.15)}
-          className="relative overflow-hidden w-[180px] xs:w-[200px] sm:w-[220px] mx-auto sm:mx-0 flex-shrink-0 order-1 sm:order-2 flex flex-col gap-2.5"
-        >
-          {/* Foto */}
-          <div
-            className="relative overflow-hidden"
-            style={{
-              background: "var(--surface)",
-              border: "0.5px solid var(--border2)",
-              borderRadius: "16px",
-              height: "280px",
-            }}
-          >
-            <Image
-              src={personal.avatar}
-              alt={personal.name}
-              fill
-              priority
-              sizes="220px"
-              style={{ objectFit: "cover" }}
-            />
-          </div>
-
-          {/* Info card — Location */}
-          <div
-            style={{
-              background: "var(--surface)",
-              border: "0.5px solid var(--border2)",
-              borderRadius: "10px",
-              padding: "10px 14px",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "9px",
-                color: "var(--purple2)",
-                letterSpacing: "0.12em",
-                marginBottom: "4px",
-              }}
-            >
-              LOCATION
-            </div>
-            <div
-              style={{
-                fontSize: "11px",
-                color: "var(--text2)",
-                fontFamily: "IBM Plex Mono, monospace",
-              }}
-            >
-              {personal.location}
-            </div>
-          </div>
-
-          {/* Info card — Status */}
-          <div
-            style={{
-              background: "var(--surface)",
-              border: "0.5px solid var(--border2)",
-              borderRadius: "10px",
-              padding: "10px 14px",
-            }}
-          >
-            <div
-              style={{
-                fontSize: "9px",
-                color: "var(--purple2)",
-                letterSpacing: "0.12em",
-                marginBottom: "4px",
-              }}
-            >
-              FOCUS
-            </div>
-            <div
-              style={{
-                fontSize: "11px",
-                color: "var(--text2)",
-                fontFamily: "IBM Plex Mono, monospace",
-              }}
-            >
-              {personal.focus}
-            </div>
           </div>
         </motion.div>
       </div>
