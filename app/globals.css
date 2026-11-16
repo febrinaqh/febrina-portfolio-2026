@@ -1,126 +1,156 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
 @import "tailwindcss";
 
-:root {
-  --bg:      #0a0a0f;
-  --bg2:     #111118;
-  --bg3:     #16161f;
-  --surface: #1c1c28;
-  --surface2:#222232;
-  --border:  rgba(255,255,255,0.07);
-  --border2: rgba(255,255,255,0.12);
-  --text:    #f0eef8;
-  --text2:   #9896b0;
-  --text3:   #4e4c62;
-  --purple:  #7c5cfc;
-  --purple2: #a78bfa;
-  --teal:    #2dd4bf;
-  --teal2:   #5eead4;
-  --amber:   #f59e0b;
-  --grad:    linear-gradient(135deg, #7c5cfc, #2dd4bf);
-}
-
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'DM Mono', monospace;
-  -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
-}
-
-::selection { background: rgba(124,92,252,0.3); color: var(--text); }
-::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
-::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
-
-.font-syne  { font-family: 'Syne', sans-serif; }
-.font-mono  { font-family: 'DM Mono', monospace; }
-.font-serif { font-family: 'Instrument Serif', serif; }
-
-.grad-text {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(124,92,252,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(124,92,252,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-}
-
-.section-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text3);
-  margin-bottom: 6px;
-}
-.section-eyebrow::before {
-  content: '';
-  width: 20px;
-  height: 1px;
-  background: var(--grad);
-  display: inline-block;
-  flex-shrink: 0;
-}
-
-.pill {
-  display: inline-block;
-  font-size: 10px;
-  padding: 2px 9px;
-  border-radius: 20px;
-  border: 0.5px solid var(--border2);
-  color: var(--text2);
-  font-family: 'DM Mono', monospace;
-}
-.pill-hi {
-  border-color: rgba(124,92,252,0.4);
-  color: var(--purple2);
-  background: rgba(124,92,252,0.06);
-}
-
 @theme inline {
-  --animate-spotlight: spotlight 2s ease 0.75s 1 forwards;
+  --font-sans: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, SFMono-Regular, monospace;
 }
 
-@keyframes spotlight {
-  0% {
-    opacity: 0;
-    transform: translate(-72%, -62%) scale(0.5);
+/* Hero background glow — drifts gently so it isn't a static blob */
+@keyframes glow-float {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
   }
+  50% {
+    transform: translate(30px, -20px) scale(1.08);
+  }
+}
+.glow-float {
+  animation: glow-float 9s ease-in-out infinite;
+}
+
+:root {
+  color-scheme: dark;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+body {
+  background: #07070d;
+}
+
+::selection {
+  background: rgba(139, 92, 246, 0.3);
+  color: #fff;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0d0d17;
+}
+::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 3px;
+}
+
+/* Hero background grid, faded toward the edges */
+.bg-grid {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 72%);
+}
+
+/* Typing-effect caret */
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+.caret {
+  animation: blink 1s step-end infinite;
+}
+
+/* Horizontally-scrolling chip rows with no visible scrollbar */
+.no-sb {
+  scrollbar-width: none;
+}
+.no-sb::-webkit-scrollbar {
+  display: none;
+}
+
+/* Project row hover spotlight */
+.proj {
+  position: relative;
+  overflow: hidden;
+}
+.proj::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s;
+  background: radial-gradient(420px circle at var(--x, 50%) var(--y, 50%), rgba(139, 92, 246, 0.14), transparent 60%);
+}
+.proj:hover::before {
+  opacity: 1;
+}
+.proj > * {
+  position: relative;
+}
+
+/* Project filter tabs */
+.ptab {
+  color: #71717a;
+  padding-bottom: 6px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.ptab:hover {
+  color: #e4e4e7;
+}
+.ptab.is-on {
+  color: #fff;
+  border-color: #22d3ee;
+}
+
+/* Fely: tail wag while walking, speech bubble float */
+@keyframes tail-wag {
+  0%,
+  100% {
+    transform: rotate(-25deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+}
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+.fely-bubble {
+  animation: float 2.5s ease-in-out infinite;
+}
+
+/* Typing-indicator dots (used inline by FelyChat) */
+@keyframes pulse-dot {
+  0%,
   100% {
     opacity: 1;
-    transform: translate(-50%, -40%) scale(1);
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(0.7);
   }
 }
 
-@keyframes pulse-dot {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%       { opacity: 0.4; transform: scale(0.7); }
-}
-.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-6px); }
-}
-.float { animation: float 3s ease-in-out infinite; }
-
-@keyframes tail-wag {
-  0%, 100% { transform: rotate(-25deg); }
-  50%       { transform: rotate(25deg); }
-}
-
-@keyframes blink {
-  0%, 90%, 100% { transform: scaleY(1); }
-  95%           { transform: scaleY(0.1); }
+@media (prefers-reduced-motion: reduce) {
+  .caret,
+  .glow-float,
+  .animate-ping,
+  .animate-pulse {
+    animation: none;
+  }
 }

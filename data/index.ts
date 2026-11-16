@@ -209,10 +209,16 @@ export const personal = {
   name: "Febrina Qoonitah",
   initials: "FQ",
   role: "Software Engineer",
+  roles: ["Software Engineer", "AI/ML Engineer", "Full-Stack Developer"],
   focus: "Software Engineer · AI/ML · Full-Stack · Scalable Systems",
   bio: "Software Engineer experienced in developing scalable, data-driven systems through the integration of AI, Machine Learning, and real-time web technologies.",
   status: "Open to opportunities",
   location: "Bandung, ID",
+  availability: [
+    "Full-time · Software Engineer / AI/ML Engineer",
+    "Contract & freelance projects",
+    "Remote, hybrid, or on-site in Bandung",
+  ],
   contact: {
     email: "febrina231@gmail.com",
     linkedin: "https://linkedin.com/in/febrina-qoonitah",
