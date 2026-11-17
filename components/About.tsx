@@ -11,130 +11,76 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
-// ── Info card (Location / Focus / Status) ─────────────────────────────────────
-function InfoCard({
-  label,
-  children,
-}: {
-  label: string;
-  children: React.ReactNode;
-}) {
-  return (
-    <div
-      style={{
-        background: "var(--surface)",
-        border: "0.5px solid var(--border2)",
-        borderRadius: "10px",
-        padding: "10px 14px",
-      }}
-    >
-      <div
-        style={{
-          fontSize: "9px",
-          color: "var(--purple2)",
-          letterSpacing: "0.12em",
-          marginBottom: "4px",
-        }}
-      >
-        {label}
-      </div>
-      <div
-        style={{
-          fontSize: "11px",
-          color: "var(--text2)",
-          fontFamily: "IBM Plex Mono, monospace",
-        }}
-      >
-        {children}
-      </div>
-    </div>
-  );
-}
+const POINTS = [
+  {
+    title: "AI & machine learning",
+    body: "Models integrated into products that run in production.",
+  },
+  {
+    title: "Full-stack development",
+    body: "Interfaces, APIs and data layers designed to work together.",
+  },
+  {
+    title: "Real-time systems",
+    body: "Web technologies that respond as the data changes.",
+  },
+];
 
-// ── Main About section ────────────────────────────────────────────────────────
 export default function About() {
   return (
-    <section
-      id="about"
-      style={{ padding: "80px 40px", background: "var(--bg)" }}
-    >
-      <div
-        style={{ maxWidth: "1100px", margin: "0 auto" }}
-        className="flex flex-col sm:flex-row items-center sm:items-start gap-10 sm:gap-12 lg:gap-20"
-      >
-        {/* LEFT — Text */}
-        <motion.div
-          {...fadeUp(0)}
-          className="w-full flex-1 order-2 sm:order-1 text-center sm:text-left"
-        >
-          <div className="section-eyebrow justify-center sm:justify-start">
-            about me
-          </div>
-          <h1
-            style={{
-              fontFamily: "IBM Plex Mono, monospace",
-              fontWeight: 800,
-              fontSize: "clamp(24px, 4vw, 32px)",
-              color: "var(--text)",
-              letterSpacing: "-0.02em",
-              marginBottom: "16px",
-            }}
-          >
-            A Bit About Me
-          </h1>
+    <section id="about" className="relative overflow-hidden px-6 py-28 md:py-36">
+      <div className="pointer-events-none absolute -right-40 top-1/3 h-[380px] w-[380px] rounded-full bg-violet-600/15 blur-[120px]" />
 
-          <p
-            style={{
-              fontSize: "13px",
-              color: "var(--text2)",
-              lineHeight: 1.85,
-              maxWidth: "560px",
-            }}
-            className="mx-auto sm:mx-0"
-          >
+      <div className="relative mx-auto grid max-w-5xl items-center gap-14 md:grid-cols-[1.25fr_0.75fr] md:gap-20">
+        {/* LEFT — Text */}
+        <motion.div {...fadeUp(0)}>
+          <h2 className="text-4xl font-bold tracking-tight sm:text-5xl">
+            A bit about me
+          </h2>
+          <p className="mt-6 max-w-xl text-xl leading-relaxed text-zinc-200">
             {personal.bio}
           </p>
+
+          <dl className="mt-10 max-w-xl divide-y divide-white/10 border-y border-white/10">
+            {POINTS.map((p) => (
+              <div
+                key={p.title}
+                className="grid gap-1 py-4 sm:grid-cols-[170px_1fr] sm:gap-6"
+              >
+                <dt className="font-mono text-sm text-violet-300">{p.title}</dt>
+                <dd className="text-sm leading-relaxed text-zinc-400">{p.body}</dd>
+              </div>
+            ))}
+          </dl>
         </motion.div>
 
-        {/* RIGHT — Photo Card */}
+        {/* RIGHT — Photo + info */}
         <motion.div
           {...fadeUp(0.15)}
-          className="w-[180px] xs:w-[200px] sm:w-[220px] flex-shrink-0 order-1 sm:order-2 flex flex-col gap-2.5"
+          className="mx-auto w-full max-w-[320px] md:max-w-none"
         >
-          {/* Foto */}
-          <div
-            className="relative overflow-hidden"
-            style={{
-              background: "var(--surface)",
-              border: "0.5px solid var(--border2)",
-              borderRadius: "16px",
-              height: "280px",
-            }}
-          >
-            <Image
-              src={personal.avatar}
-              alt={personal.name}
-              fill
-              sizes="220px"
-              style={{ objectFit: "cover" }}
-            />
+          <div className="rounded-2xl bg-gradient-to-br from-violet-500/60 via-white/10 to-cyan-400/60 p-px shadow-2xl shadow-violet-500/10">
+            <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[15px]">
+              <Image
+                src={personal.avatar}
+                alt={personal.name}
+                fill
+                sizes="(min-width: 768px) 320px, 70vw"
+                className="object-cover"
+              />
+            </div>
           </div>
 
-          <InfoCard label="LOCATION">{personal.location}</InfoCard>
-          <InfoCard label="FOCUS">{personal.focus}</InfoCard>
-          <InfoCard label="STATUS">
-            <span className="inline-flex items-center gap-2">
-              <span
-                className="pulse-dot inline-block rounded-full"
-                style={{
-                  width: "6px",
-                  height: "6px",
-                  background: "var(--teal)",
-                }}
-              />
-              {personal.status}
-            </span>
-          </InfoCard>
+          <ul className="mt-4 space-y-2.5 rounded-2xl border border-white/10 bg-white/[0.03] p-4 font-mono text-[13px]">
+            <li className="flex justify-between gap-4">
+              <span className="text-zinc-500">Location</span>
+              <span className="text-zinc-200">{personal.location}</span>
+            </li>
+            <li className="flex justify-between gap-4">
+              <span className="text-zinc-500">Focus</span>
+              <span className="text-right text-zinc-200">{personal.focus}</span>
+            </li>
+          </ul>
         </motion.div>
       </div>
     </section>
