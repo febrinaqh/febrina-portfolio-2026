@@ -1,15 +1,27 @@
+import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Projects from "@/components/Projects";
+import Experience from "@/components/Experience";
+import Skills from "@/components/Skills";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import Fely from "@/components/fely/Fely";
 
 export default function Home() {
   return (
-    <main className="relative flex justify-center items-center flex-col overflow-hidden px-5 sm:px-10 md:px-14 lg:px-20 xl:px-24">
-      <div className="max-w-7xl w-full mx-auto">
+    <>
+      <Navbar />
+      <main className="relative overflow-x-hidden">
         <Hero />
         <About />
-        <Projects/>
-      </div>
-    </main>
+        <Projects />
+        <Experience />
+        <Skills />
+        <Contact />
+      </main>
+      <Footer />
+      <Fely />
+    </>
   );
 }
