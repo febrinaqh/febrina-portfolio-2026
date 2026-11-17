@@ -63,7 +63,7 @@ export const projects: Project[] = [
       "GitHub",
     ],
     stackHighlight: ["React.js", "Telegram Bot", "PHP"],
-    links: {},
+    links: { github: "https://github.com/febrinaqh/admin-temukan-hoax" },
   },
   {
     id: "smartstore",
@@ -83,7 +83,7 @@ export const projects: Project[] = [
       "Google Colab",
     ],
     stackHighlight: ["Python", "XGBoost", "Apriori", "Flask"],
-    links: {},
+    links: { github: "https://github.com/febrinaqh/SmartStore-Modelling" },
   },
   {
     id: "coursecenter",
