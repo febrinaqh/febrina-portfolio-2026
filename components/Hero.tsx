@@ -10,45 +10,24 @@ const fadeUp = (delay = 0) => ({
   transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
-// ── Classic type/delete rotating headline ──────────────────────────────────────
-function TypedRoles({ words }: { words: string[] }) {
-  const [text, setText] = useState("");
+// ── One-time typing animation for the name ─────────────────────────────────────
+function TypedName({ name }: { name: string }) {
+  const [count, setCount] = useState(0);
+  const done = count >= name.length;
 
   useEffect(() => {
-    let word = 0;
-    let char = 0;
-    let deleting = false;
-    let timer: ReturnType<typeof setTimeout>;
-
-    const tick = () => {
-      const current = words[word];
-      setText(current.slice(0, char));
-
-      if (!deleting && char === current.length) {
-        deleting = true;
-        timer = setTimeout(tick, 1600);
-        return;
-      }
-      if (deleting && char === 0) {
-        deleting = false;
-        word = (word + 1) % words.length;
-      }
-      char += deleting ? -1 : 1;
-      timer = setTimeout(tick, deleting ? 40 : 80);
-    };
-
-    timer = setTimeout(tick, 300);
+    if (done) return;
+    const timer = setTimeout(() => setCount((c) => c + 1), count === 0 ? 400 : 90);
     return () => clearTimeout(timer);
-  }, [words]);
+  }, [count, done]);
 
   return (
-    <p className="mt-5 h-9 font-mono text-xl text-zinc-300 sm:text-2xl">
-      {text}
-      <span
-        aria-hidden="true"
-        className="caret ml-0.5 inline-block h-6 w-[2px] translate-y-1 bg-cyan-400"
-      />
-    </p>
+    <span aria-hidden="true">
+      {name.slice(0, count)}
+      <span className="caret ml-1 inline-block h-[0.85em] w-[3px] translate-y-[0.1em] bg-cyan-400" />
+      {/* Reserve the remaining width so the centered name doesn't shift while typing */}
+      <span className="invisible">{name.slice(count)}</span>
+    </span>
   );
 }
 
@@ -79,20 +58,17 @@ export default function Hero() {
       </motion.div>
 
       <div className="relative z-10 mx-auto flex max-w-3xl flex-col items-center text-center">
-        <motion.p {...fadeUp(0)} className="mb-3 font-mono text-sm text-zinc-500">
+        <motion.p {...fadeUp(0)} className="mb-3 font-mono text-lg text-zinc-500">
           {personal.greeting}
         </motion.p>
 
         <motion.h1
           {...fadeUp(0.1)}
+          aria-label={personal.name}
           className="bg-gradient-to-r from-violet-300 via-fuchsia-300 to-cyan-200 bg-clip-text text-5xl font-bold leading-[1.05] tracking-tight text-transparent sm:text-6xl md:text-7xl"
         >
-          {personal.name}
+          <TypedName name={personal.name} />
         </motion.h1>
-
-        <motion.div {...fadeUp(0.2)}>
-          <TypedRoles words={personal.roles} />
-        </motion.div>
 
         <motion.p
           {...fadeUp(0.3)}
